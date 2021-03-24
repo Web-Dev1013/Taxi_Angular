@@ -1,0 +1,128 @@
+<!--
+
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content>
+      <ion-list id="inbox-list">
+        <ion-list-header>Inbox</ion-list-header>
+        <ion-note>hi@ionicframework.com</ion-note>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages; let i = index">
+          <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.link]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+      <ion-list id="labels-list">
+        <ion-list-header>Labels</ion-list-header>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane>
+
+ -->
+
+
+<ion-split-pane contentId="main">
+  <ion-menu side="start" menuId="first" contentId="main" class="drop-shadow" no-border>
+    <img class="app-logo" src="assets/icon/application-logo.jpg" alt="" />
+    <ion-content cache-view="false" appScrollbar>
+      <ion-list>
+
+          <ion-item-group [class.active]="dashboardActive && path === '/dashboard'">
+            <ion-item-divider (click)="clickedMenuItem('dashboard')" [routerLink]="['/dashboard']" color="light"
+              routerDirection="root">
+              <img src="assets/icon/dashboard-icon.png">
+              Dashboard
+            </ion-item-divider>
+          </ion-item-group>
+
+
+        <!--If role is user -->
+          <!-- [class.active]='selectedLink === data.link' -->
+          <ng-container *ngIf="role === 'user'">
+
+            <ion-item-group *ngFor="let data of productGroups"
+            [class.active]='selectedLink === data.slug && !dashboardActive && !discussionArea && !support'>
+            <ion-item-divider (click)="getMenuItem(data)" color="light" routerDirection="root">
+              <ng-container *ngIf="data.icon else defaultIconClass">
+                <!-- <ion-icon class="{{data.class}}"></ion-icon> -->
+                <img src="{{baseurl}}{{data.icon}}">
+                {{data.title}}
+                <ion-icon slot="end" class="accordion-icon" size="small" *ngIf="data.products.length>0"
+                [name]="(selectedLink === data.slug) ? 'chevron-down-outline' : 'chevron-forward-outline'">
+                </ion-icon>
+              </ng-container>
+              <ng-template #defaultIconClass>
+                <!-- <ion-icon class="membership-sprite"></ion-icon> -->
+                <img src="assets/icon/default-icon.png">
+                {{data.title}}
+                <ion-icon slot="end" class="accordion-icon"
+                [name]="(selectedLink === data.slug) ? 'chevron-down-outline' : 'chevron-forward-outline'">
+                </ion-icon>
+              </ng-template>
+
+            </ion-item-divider>
+            <ng-container
+              *ngIf="selectedLink === data.slug && data.products && !dashboardActive && !discussionArea && !support">
+              <ion-item class="sub-menu" (click)="getChild(child)" *ngFor="let child of data.products"
+                [class.active]='activeChild === child.slug && !dashboardActive && !discussionArea && !support'>
+                <ng-container *ngIf="child.locked else lockedContent">
+                  <ion-label style="pointer-events: none;" innerHtml="">{{child.title}}</ion-label>
+                </ng-container>
+                <ng-template #lockedContent>
+                  <div *ngIf="data._id === child.groupId">
+                    <ion-label>{{child.title}}</ion-label>
+                  </div>
+                </ng-template>
+
+              </ion-item>
+            </ng-container>
+
+          </ion-item-group>
+
+            <ion-item-group [class.active]="discussionArea && path === '/discussion-area'">
+              <ion-item-divider (click)="clickedMenuItem('discussion-area')" [routerLink]="['/discussion-area']"
+                color="light" routerDirection="root">
+                <!-- <ion-icon class="dashboard-sprite"></ion-icon> -->
+                <img src="assets/icon/discussion-icon.png">
+                Discussion Area
+              </ion-item-divider>
+            </ion-item-group>
+            <ion-item-group [class.active]="support && path === '/support'">
+              <ion-item-divider (click)="clickedMenuItem('support')" [routerLink]="['/support']" color="light"
+                routerDirection="root">
+                <!-- <ion-icon class="dashboard-sprite"></ion-icon> -->
+                <img src="assets/icon/support-icon.png">
+                Support
+              </ion-item-divider>
+            </ion-item-group>
+
+
+          </ng-container>
+
+
+
+        <!-- If role is admin -->
+        <ion-menu-toggle auto-hide="false" *ngIf="role === 'admin'">
+          <!-- [class.active]='selectedLink === data.link' -->
+          <ion-item-group *ngFor="let data of productGroups" [class.active]='selectedAdminLink === data.link'>
+            <ion-item-divider (click)="getAdminMenuItem(data)" color="light" routerDirection="root">
+              <img src="assets/icon/default-icon.png">
+              {{data.title}}
+            </ion-item-divider>
+          </ion-item-group>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+    <div class="footer-logo">
+      <h6>Powered By</h6>
+      <img class="app-logo" src="assets/icon/application-logo.png" alt="" />
+    </div>
+  </ion-menu>
+  <ion-router-outlet id="main">
+  </ion-router-outlet>
+</ion-split-pane>

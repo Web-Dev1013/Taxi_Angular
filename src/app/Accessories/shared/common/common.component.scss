@@ -1,0 +1,182 @@
+// TOOLBAR
+
+// WEBSITE VARIABLES
+@import "../../../../theme/variables.scss";
+
+ion-header {
+    ion-toolbar {
+        --min-height: 90px;
+        --background: transparent;
+        padding: 0 20px;
+        @media screen and (max-width: 768px) {
+            padding: 0 15px;
+            --min-height: 70px;
+        }
+        @media screen and (max-width: 480px) {
+            padding: 0 10px;
+            --min-height: 60px;
+        }
+        ion-buttons {
+            margin-inline-start: 0;
+            border-radius: 6px;
+        }
+        ion-menu-button {
+            width: 52px;
+            height: 46px;
+            --background: #fff;
+            border: $border;
+            --border-radius: 6px;
+            border-radius: 6px;
+            color: $text-color;
+            @media screen and (max-width: 991px) {
+                width: 46px;
+                height: 46px;
+            }
+            @media screen and (max-width: 768px) {
+                width: 44px;
+                height: 40px;
+            }
+            @media screen and (max-width: 480px) {
+                font-size: 24px;
+            }
+            @media screen and (max-width: 480px) {
+                width: 40px;
+                height: 36px;
+            }
+        }
+        ion-list {
+            background: transparent;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            contain: inherit;
+        }
+    }
+}
+.header,
+app-common {
+    contain: content;
+    overflow: visible;
+    border-bottom: 1px solid $light-border;
+    background: #fff;
+    @media screen and (max-width: 991px) {
+        background-color: #fff;
+    }
+    .header-toolbar {
+        contain: inherit;
+        overflow: visible;
+    }
+}
+.dropdown-toggle {
+    position: relative;
+    padding: 0;
+    @media screen and (max-width: 991px) {
+        font-size: 0;
+    }
+    img {
+        margin-right: 8px;
+        object-fit: cover;
+        @media screen and (max-width: 480px) {
+            margin-right: 7px !important;
+            width: 38px !important;
+            height: 38px !important;
+        }
+    }
+    &:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+    &:after {
+        margin-left: 14px;
+        width: 10px;
+        height: 6px;
+        background: url("../../../../assets/icon/arrow-down.png");
+        border: 0;
+        position: relative;
+        top: 3px;
+        @media screen and (max-width: 991px) {
+            margin-left: 0;
+        }
+    }
+}
+
+.logo-desktop-hide {
+    display: none;
+    @media screen and (max-width: 991px) {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: 22px;
+    }
+    @media screen and (max-width: 768px) {
+        width: 206px;
+        top: 16px;
+    }
+    @media screen and (max-width: 480px) {
+        width: 142px;
+        top: 19px;
+    }
+}
+
+// DROPDOWN
+.dropdown {
+    &-menu {
+        border: 1px solid #e5e5e5;
+        top: 17px !important;
+        border-radius: 0;
+        right: 36px;
+        @media screen and (max-width: 991px) {
+            left: 8px !important;
+            top: 21px !important;
+            min-width: 11rem;
+        }
+        @media screen and (max-width: 768px) {
+            top: 11px !important;
+        }
+        @media screen and (max-width: 480px) {
+            top: 8px !important;
+        }
+    }
+}
+.profile-dropdown {
+    position: absolute;
+    right: 0;
+    top: 2px;
+    z-index: 10;
+    padding: 22px 20px 18px;
+    &.show {
+        background: #fff;
+    }
+    @media screen and (max-width: 991px) {
+        top: 20px;
+        padding: 0;
+        right: 20px;
+    }
+    @media screen and (max-width: 768px) {
+        top: 10px;
+        right: 15px;
+    }
+    @media screen and (max-width: 480px) {
+        top: 9px;
+        right: 10px;
+    }
+}
+// NOTIFICATION
+.notification-alert {
+    position: relative;
+    @media screen and (max-width: 991px) {
+        margin-right: 0 !important;
+    }
+    span {
+        width: 8px;
+        height: 8px;
+        display: block;
+        background-color: $primary;
+        border-radius: 50%;
+        position: absolute;
+        right: 0;
+        top: 1px;
+    }
+}

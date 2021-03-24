@@ -1,0 +1,61 @@
+<app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar *ngIf="!loading">
+  <ion-row>
+  </ion-row>
+  <ion-row>
+    <div class="page-heading page-heading-btn">
+      <h2>Product Groups</h2>
+      <ion-button color="primary" slot="end" (click)="addProductCategory()">
+        <ion-icon name="add-outline" class="mr-2"></ion-icon>Add Product Group
+      </ion-button>
+    </div>
+  </ion-row>
+  <!-- <div>
+            <p *ngFor = "let product of allProducts">{{product.title}}
+                <ion-button size="default" class="mr-3" slot="end" (click)="editProductType(product)" >edit Product Type
+                </ion-button>
+            </p>
+        </div> -->
+
+  <ng-container *ngIf="allProductsTypes.length > 0">
+    <div tabindex="1" #productGroups *ngFor="let pro of allProductsTypes" class="card">
+      <div style="border : 2px">
+        <h2 class="card-head">
+          <span>{{pro.title}}</span>
+          <ion-button size="default" fill="outline" color="medium" class="ml-auto" slot="end" (click)="addProduct(pro)">
+            Add Product
+          </ion-button>
+          <ion-button size="default" class="ml-2" color="medium" slot="end" (click)="editProductType(pro)">Edit
+            Product Group
+          </ion-button>
+          <ion-button *ngIf="productGroupEmpty(pro)" size="default" color="danger" class="ml-2" slot="end"
+            (click)="deleteGroups(pro.slug)">
+            <ion-icon class="icon-button delete" size="small" slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </h2>
+        <div class="card-body">
+          <ng-container *ngIf="!productGroupEmpty(pro) else noProducts">
+            <ul *ngFor="let child of allProducts">
+              <li *ngIf="child.groupId.slug === pro.slug ">
+                <p>{{child.title}}</p>
+                <ion-icon class="icon-button ml-auto" size="large" (click)="edit(pro,child)" slot="icon-only"
+                  name="create-outline"></ion-icon>
+                <ion-icon class="icon-button delete" size="large" slot="icon-only" name="trash-outline"
+                  (click)="deleteProduct(child)"></ion-icon>
+              </li>
+            </ul>
+          </ng-container>
+          <ng-template #noProducts>
+            <p>No products to display</p>
+          </ng-template>
+
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+  <div *ngIf="allProductsTypes.length === 0">
+    <p>Sorry! No product Groups to display</p>
+  </div>
+</ion-content>

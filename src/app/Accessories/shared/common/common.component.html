@@ -1,0 +1,30 @@
+<ion-header class="header" #ionHeader appShadowCss
+  shadowCustomCss='.toolbar-container{overflow:visible;} .toolbar-content{overflow:visible;} .item-inner{overflow:visible;}'>
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="start" >
+      <ion-menu-button [autoHide]=false (click)="ToggleMenu()"></ion-menu-button>
+    </ion-buttons>
+    <!-- <ng-template #close>
+      <ion-buttons slot="start">
+        <ion-button [autoHide]=false (click)="ToggleMenu()">open</ion-button>
+      </ion-buttons>
+    </ng-template> -->
+    <img class="app-logo logo-desktop-hide" src="assets/icon/application-logo.jpg" alt="" />
+  </ion-toolbar>
+</ion-header>
+<!-- <div class="notification-alert mr-4">
+  <img src="assets/icon/message-icon.png" alt="" />
+  <span></span>
+</div> -->
+<div ngbDropdown class="profile-dropdown d-flex justify-content-center align-items-center">
+  <button class="btn" id="dropdownBasic1" ngbDropdownToggle>
+    <img ngxGravatar [email]="email" size="45" src="{{image}}" />
+<!-- [preferGravatar]= true src="https://picsum.photos/200/300" -->
+{{username}}
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+     <button ngbDropdownItem (click)="goToSettings()">Settings</button>
+    <!-- <button (click)="goToChangePasswordPage()" ngbDropdownItem>Change Password</button> -->
+    <button ngbDropdownItem (click)= "logout()">Logout</button>
+  </div>
+</div>

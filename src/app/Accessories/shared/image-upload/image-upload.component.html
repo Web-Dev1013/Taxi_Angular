@@ -1,0 +1,9 @@
+
+
+
+<img *ngIf="imageUrl" [src]="imageUrl" class="image mb-1 mr-3">
+<input accept="image/*" #Image type="file" class="mb-1" (change)="handleFileInput($event.target.files)"/>
+
+<div class="text-danger" *ngIf="showInput">
+    <p>Only image files are allowed</p>
+</div>

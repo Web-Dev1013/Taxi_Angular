@@ -1,0 +1,94 @@
+<ion-row>
+  <ion-col class="ion-no-padding">
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <form  padding-right [formGroup]="userForm">
+          <ion-item lines="inset" class="ion-no-padding">
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input formControlName="firstName"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="errorControl.firstName.errors?.required">
+            First Name is required.
+          </span>
+          <span class="error" *ngIf="errorControl.firstName.errors?.minlength">
+            First Name should be min 2 characters long.
+          </span>
+          <span class="error" *ngIf="errorControl.firstName.errors?.pattern">
+            First Name should only contain alphabets
+          </span>
+          <ion-item lines="inset" class="ion-no-padding">
+            <ion-label position="floating">Last Name</ion-label>
+            <ion-input formControlName="lastName"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="errorControl.lastName.errors?.required">
+            Last Name is required.
+          </span>
+          <span class="error" *ngIf="errorControl.lastName.errors?.minlength">
+            Last Name should be min 2 characters long.
+          </span>
+          <span class="error" *ngIf="errorControl.lastName.errors?.pattern">
+            Last Name should only contain alphabets
+          </span>
+          <ion-item lines="inset" class="ion-no-padding">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="errorControl.email.errors?.required">
+            Email is required.
+          </span>
+          <span class="error" *ngIf="errorControl.email.errors?.pattern">
+            Enter a valid Email Address
+          </span>
+          <!-- <ion-item lines="inset" class="ion-no-padding">
+            <ion-label position="floating">InfusionSoft Id</ion-label>
+            <ion-input formControlName="infusionSoftId" readonly></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="errorControl.infusionSoftId.errors?.required" >
+            InfusionSoft Id is required.
+          </span>
+          <span class="error" *ngIf="errorControl.infusionSoftId.errors?.pattern">
+            InfusionSoft can only be a number
+          </span> -->
+          <!-- <ion-item lines="none" class="ion-no-padding">
+            <ion-radio-group formControlName="userRole">
+              <ion-list-header class="ion-no-padding">
+                <ion-label>Select Role</ion-label>
+              </ion-list-header>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label class="ion-padding-end">Admin</ion-label>
+                    <ion-radio color="secondary" slot="start" value="admin"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label class="ion-padding-end">User</ion-label>
+                    <ion-radio color="secondary" slot="start" value="user"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-radio-group>
+          </ion-item> -->
+          <ion-row>
+            <ion-col class="button-controls">
+              <!-- <ion-item lines="none" class="ion-no-padding mr-auto" style="padding-right: 0 !important;">
+                <ion-button size="default" slot="end" color="medium" (click)="resetPassword()">Reset Password
+                </ion-button>
+              </ion-item> -->
+              <!-- <ion-item lines="none" class="ion-no-padding">
+                <ion-button size="default" class="mr-3" slot="end" (click)="onSubmit()"
+                  [disabled]="!userForm.valid">Update
+                </ion-button>
+              </ion-item>
+              <ion-item lines="none" class="ion-no-padding">
+                <ion-button size="default" color="dark" slot="end" (click)="showUpdateForm = false">Cancel
+                </ion-button>
+              </ion-item> -->
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>

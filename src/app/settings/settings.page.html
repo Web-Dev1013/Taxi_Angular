@@ -1,0 +1,77 @@
+<app-common></app-common>
+<ion-content class="ion-padding setting-layout">
+  <ion-row>
+    <div class="page-heading page-heading-btn">
+      <h2>Settings</h2>
+      <ion-button (click)="back()" class="main-back-btn" color="medium" fill="outline">
+        <ion-icon class="mr-2" name="chevron-back-outline"></ion-icon>Back
+      </ion-button>
+    </div>
+  </ion-row>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+        aria-selected="true">Update profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password"
+        aria-selected="false">Change password</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <ng-container>
+        <ion-row>
+          <ion-col class="ion-no-padding">
+            <ion-card class="ion-no-margin setting-parent-layout">
+              <ion-card-content>
+                <div class="image-upload-profile">
+                  <div *ngIf="image">
+                      <app-image-upload (disabled)="checkFormValid($event)"  [icon]="image" (emitImageToAddProduct)="getUserProfile($event)">
+                      </app-image-upload>
+                    </div>
+                    <div *ngIf="!image">
+                      <app-image-upload (disabled)="checkFormValid($event)" (emitImageToAddProduct)="getUserProfile($event)">
+                      </app-image-upload>
+                    </div>
+                  </div>
+                <app-user-form *ngIf="userDetails" [userDetails]="userDetails" (userDetailsToUserForm)="getFormValue($event)"
+                  (disabled)="checkFormValid($event)"></app-user-form>
+               
+                <ion-button size="default" class="default-button" slot="end" (click)="onSubmit()"
+                  [disabled]="disabled">Update
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+
+    </div>
+    <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+      <app-change-password></app-change-password>
+    </div>
+  </div>
+
+
+
+
+
+  <!--   
+  <ion-row class="ion-justify-content-center auth-layout">
+    <ion-col size-sm="12" size-lg="4">
+      <h2 class="mb-3">Settings</h2>
+      <div class="login-card">
+        <ion-card>
+          <ion-card-content no-padding>
+            <h2>Coming Soon</h2>
+            <ion-button (click)="back()" color="medium" fill="outline">
+              <ion-icon class="mr-2" name="chevron-back-outline"></ion-icon>Back
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-col>
+  </ion-row> -->
+
+</ion-content>

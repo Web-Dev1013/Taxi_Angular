@@ -1,0 +1,175 @@
+<app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar>
+  <div class="breadcrumbs">
+    <ul>
+      <li><a (click)="back()"><span *ngIf = "fromSubCategory">Sub Category</span></a></li>
+      <li><a (click)="back()"><span *ngIf = "fromCategory">Category</span></a></li>
+      <li><a (click)="back()"><span>Post</span></a></li>
+      <li><span>Create</span></li>
+    </ul>
+  </div>
+  <ion-row>
+  </ion-row>
+  <div class="page-heading page-heading-btn">
+    <h2>Add Post</h2>
+    <ion-button (click)="back()" class="main-back-btn" color="medium" fill="outline">
+      <ion-icon class="mr-2" name="chevron-back-outline"></ion-icon>Back
+    </ion-button>
+  </div>
+  <form (ngSubmit)="onClickSubmit()" padding-right [formGroup]="productForm">
+    <ion-row>
+      <ion-col class="pr-10" size-xl="8" size-lg="7" size-md="12" size-sm="12" size-xs="12">
+        <ion-card class="ion-no-margin">
+          <ion-card-content>
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Title</ion-label>
+              <ion-input formControlName="title"></ion-input>
+            </ion-item>
+            <span class="error" *ngIf=" touched && errorControl.title.errors?.required">
+              This field cannot be empty
+            </span>
+            <span class="error" *ngIf="errorControl.title.errors?.maxlength">
+              Title should be less than 100 characters
+            </span>
+            <span class="error" *ngIf="errorControl.title.errors?.serverError">
+              {{serverError.title}}
+            </span>
+
+            <ion-item *ngIf = "fromCategory" lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Category</ion-label>
+              <ion-input readonly formControlName="parentCategory"></ion-input>
+            </ion-item>
+            <!-- <span class="error" *ngIf="errorControl.parentCategory.errors?.required">
+              This field cannot be empty
+            </span> -->
+
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea rows="5" formControlName="description"></ion-textarea>
+            </ion-item>
+            <span class="error" *ngIf="touched && errorControl.description.errors?.required">
+              This field cannot be empty
+            </span>
+            <span class="error" *ngIf="errorControl.description.errors?.maxlength">
+              Description should be less than 2000 characters
+            </span>
+
+            <span class="error" *ngIf="errorControl.description.errors?.serverError">
+              {{serverError.description}}
+            </span>
+
+
+
+            <ion-item lines="inset" class="ion-no-padding traders-edge--editor">
+              <ion-label position="floating">Body</ion-label>
+              <app-editor *ngIf="contentBody" #tinyPostAdd (editorDataToParent)="getEditorValue($event)"></app-editor>
+              <!-- <app-editor [empty]='emptyEditor' *ngIf="contentBody && emptyEditor" #tinyPostAdd (editorDataToParent)="getEditorValue($event)"></app-editor> -->
+            </ion-item>
+            <!-- <span class="error" *ngIf="touched && errorControl.formModel.errors?.required">
+              Content for Post is required
+            </span> -->
+
+
+
+            <!-- this div is to open editor and tag textbox -->
+
+            <!-- <div *ngIf="openEditor"> -->
+
+            <!-- <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Infusion Soft Tags</ion-label>
+              <div class="editor-tag" >
+                <span class="tag-item" *ngFor="let tag of tags">
+                        {{tag}}
+                        <span class="remove-tag" (click)="removeTag(tag)">×</span>
+                      </span>
+                      <ion-input
+                      placeholder="add new tag"
+                      #tagInput type="text"
+                      class="input-tag"
+                      (keyup)="onKeyUp($event)"
+                      formControlName="tags"></ion-input>
+                    </div>
+            </ion-item> -->
+            <!-- <div *ngIf = "openEditor">
+              <span class="error" *ngIf="errorControl.tags.errors?.required">
+                This field cannot be empty
+              </span>
+            </div> -->
+
+
+            <!-- <div *ngIf = "openEditor">
+              <span class="error" *ngIf="errorControl.formModel.errors?.required">
+                This field cannot be empty
+              </span>
+            </div> -->
+            <!-- </div> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="pl-10 ion-no-padding" size-xl="4" size-lg="5" size-sm="12" size-md="12" size-xs="12">
+        <ion-card class="ion-no-margin side-card">
+          <ion-card-content>
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-radio-group formControlName="visibility" (ionChange)="changeStateCallback($event)">
+                <ion-list-header class="ion-no-padding">
+                  <ion-label>visibility</ion-label>
+                </ion-list-header>
+                <ion-row>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Published</ion-label>
+                      <ion-radio color="secondary" slot="start" value="published"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Draft</ion-label>
+                      <ion-radio color="secondary" slot="start" value="draft"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-radio-group>
+            </ion-item>
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-radio-group formControlName="commentDisabled">
+                <ion-list-header class="ion-no-padding">
+                  <ion-label>Comments</ion-label>
+                </ion-list-header>
+                <ion-row>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Visible</ion-label>
+                      <ion-radio selected color="secondary" slot="start" value=false></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Hidden</ion-label>
+                      <ion-radio color="secondary" slot="start" value=true></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-radio-group>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-button
+      size="default"
+      slot="end" (click)="onClickSubmit()" (keyup.enter)="onClickSubmit()" [disabled]="!productForm.valid || !lockedContent || lockedContent===' ' ||lockedContent==='' "
+    >
+      Submit
+    </ion-button>
+
+    <!-- <ion-button
+    size="default"
+    slot="end"
+    type="submit"
+    [disabled]="!lockedContent || !productForm.valid"
+  >
+    Submit
+  </ion-button> -->
+  </form>
+</ion-content>

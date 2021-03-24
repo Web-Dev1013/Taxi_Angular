@@ -1,0 +1,152 @@
+// PAGE HEADING
+.page-heading {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    h2 {
+        font-size: 24px !important;
+        font-family: "Lato", sans-serif !important;
+        font-weight: 700 !important;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        @media screen and (max-width: 580px) {
+            font-size: 20px !important;
+            margin-bottom: 10px;
+        }
+    }
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        h2 {
+            flex: 1 1 100%;
+        }
+        ion-button {
+            margin-right: 10px !important;
+            margin-left: 0 !important;
+        }
+    }
+    @media (max-width: 580px) {
+        ion-button {
+            font-size: 12px;
+        }
+    }
+}
+.ion-padding {
+    --padding-start: var(--ion-padding, 32px);
+    --padding-end: var(--ion-padding, 32px);
+    --padding-top: var(--ion-padding, 32px);
+    --padding-bottom: var(--ion-padding, 32px);
+    @media screen and (max-width: 991px) {
+        --padding-start: var(--ion-padding, 20px);
+        --padding-end: var(--ion-padding, 20px);
+        --padding-top: var(--ion-padding, 20px);
+        --padding-bottom: var(--ion-padding, 20px);
+    }
+}
+ion-content {
+    --background: #eff3f6;
+}
+// PRODUTS
+.card {
+    margin-bottom: 20px;
+    &-head {
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 20px;
+        background: #f1f8ed;
+        font-size: 20px;
+        text-transform: capitalize;
+        align-items: center;
+        margin-bottom: 0;
+        @media (max-width: 768px) {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            span {
+                flex: 1 1 100%;
+            }
+            ion-button {
+                margin-right: 10px !important;
+                margin-left: 0 !important;
+            }
+        }
+        @media (max-width: 580px) {
+            ion-button {
+                font-size: 12px;
+            }
+        }
+    }
+    &-body {
+        padding-top: 0;
+        padding-bottom: 0;
+        min-height: 50px;
+        ul {
+            padding-left: 0;
+            margin-bottom: 0;
+            li {
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                font-size: 16px;
+                border-bottom: 1px solid #ddd;
+                align-items: center;
+                padding: 8px 0;
+                text-transform: capitalize;
+                @media screen and (max-width: 580px) {
+                    flex-wrap: wrap;
+                }
+                p {
+                    margin-bottom: 0;
+                    flex: 1 1 70%;
+                    margin-right: 10px;
+                    word-break: break-all;
+                    line-height: 18px;
+                }
+                ion-icon {
+                    cursor: pointer;
+                    @media screen and (max-width: 580px) {
+                        width: 24px !important;
+                        height: 24px !important;
+                    }
+                    &:hover {
+                        opacity: 0.4;
+                    }
+                }
+            }
+            &:last-child {
+                li {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}
+// DEFAULT USER BUTTON
+.ion-color-primary {
+    --ion-color-base: #8abf47 !important;
+    --ion-color-base-rgb: #8abf47 !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: black !important;
+    --ion-color-shade: #8abf47 !important;
+    --ion-color-tint: #8abf47 !important;
+    --box-shadow: none;
+}
+.ion-color-medium {
+    --ion-color-base: #575757 !important;
+    --ion-color-base-rgb: #575757 !important;
+    --ion-color-contrast: #fff !important;
+    --ion-color-contrast-rgb: black !important;
+    --ion-color-shade: #575757 !important;
+    --ion-color-tint: #575757 !important;
+    --box-shadow: none;
+}
+.ion-color-danger {
+    --box-shadow: none;
+}
+.ion-color-secondary {
+    --box-shadow: none;
+}
+.icon-button {
+    cursor: pointer;
+}

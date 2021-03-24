@@ -1,0 +1,90 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+  <app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar>
+  <div *ngIf="role==='admin'">
+    <div class="page-heading">
+      <h2>Hello {{title}},<br /><span>Welcome to Dashboard</span></h2>
+    </div>
+  
+    <ion-card>
+      <ion-card-content>
+        <div class="flex-layout stats-card">
+          <h2>Total Users : </h2>
+          <p>{{usersCount}}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+<div *ngIf="role==='user'">
+  <h2 class="page-heading">Dashboard</h2>
+  <ion-grid class="p-0">
+    <ion-row>
+      <ion-col size-xl="8" size-lg="12" size-xs="12" class="p-0 pr-25">
+        <div class="box-header">
+          <h6 class="green">Announcements</h6>
+          <a >VIEW ALL</a>
+        </div>        
+        <div class="annoucement-alert">
+          <header>
+            <h2>Welcome back <strong>{{userName}}!</strong></h2>
+            <label for="" class="annoucement-alert-bar"><span>2</span>  Announcements
+              <img class="app-logo hide-desktop-speaker" src="assets/icon/speaker.png" alt="" />
+            </label>
+          </header>
+          <ion-list>
+            <ion-item lines="none">
+              <img class="app-logo" src="assets/icon/speaker.png" alt="" />
+              <p>
+                Lorem ipsum dolor sit consectetur adipiscing elitsed do eiusmod tempor incididunt ut labore et dolore. Ut enim ad minim veniam  
+              </p>
+            </ion-item>  
+            <ion-item lines="none">
+              <img class="app-logo" src="assets/icon/speaker.png" alt="" />
+              <p>
+                Lorem ipsum dolor sit consectetur adipiscing elitsed do eiusmod tempor incididunt ut labore et dolore. Ut enim ad minim veniam  
+              </p>
+            </ion-item> 
+            </ion-list>
+        </div>
+      </ion-col>
+      <ion-col class="p-0">
+        <div class="box-header">
+          <h6>Events</h6>
+          <a>VIEW ALL</a>
+        </div>        
+        <div class="card-row-listing">
+          <ion-list>
+            <ion-item lines="none">
+              <span class="card-label">01</span>
+              <div class="card-content">
+                <h6>Orange County, CA</h6>
+                <p>09th – 10th 2020, Aug</p>
+              </div>
+            </ion-item>  
+            <ion-item lines="none">
+              <span class="card-label">02</span>
+              <div class="card-content">
+                <h6>Orange County, CA</h6>
+                <p>09th – 10th 2020, Aug</p>
+              </div>
+            </ion-item> 
+            <ion-item lines="none">
+              <span class="card-label">03</span>
+              <div class="card-content">
+                <h6>Orange County, CA</h6>
+                <p>09th – 10th 2020, Aug</p>
+              </div>
+            </ion-item> 
+            </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</div>
+</ion-content>

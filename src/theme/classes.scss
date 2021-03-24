@@ -1,0 +1,16 @@
+// GRID
+
+.d-flex {
+    display: flex;
+}
+
+// PADDING
+.p-0 {
+    padding: 0 !important;
+}
+.pr-25 {
+    padding-right: 25px !important;
+    @media screen and (max-width: 1200px) {
+        padding-right: 0 !important;
+    }
+}

@@ -1,0 +1,4 @@
+<p>{{ content }}
+<small color="transparent" class="show" *ngIf="!isContentToggled && show" (click)="toggleContent()" i18n>Read More</small>
+<small color="none" class="show" *ngIf="isContentToggled && show" (click)="toggleContent()" i18n>Read Less</small>
+</p>

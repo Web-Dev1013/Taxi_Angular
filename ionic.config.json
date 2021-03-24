@@ -1,0 +1,7 @@
+{
+  "name": "pirateportal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

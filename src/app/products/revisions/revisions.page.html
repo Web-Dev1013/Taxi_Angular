@@ -1,0 +1,87 @@
+<app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar>
+  <ion-row>
+    <div class="page-heading page-heading-btn">
+      <h2>Revisions</h2>
+      <ion-button (click)="back()" color="medium" class="ml-auto mr-2 main-back-btn" fill="outline">
+        <ion-icon class="mr-2" name="chevron-back-outline"></ion-icon>Back
+      </ion-button>
+      <ion-button color="primary" slot="end" (click)="restoreAutoSave()">
+        <ion-icon name="refresh-outline" class="mr-2"></ion-icon>Restore this Autosave
+      </ion-button>
+    </div>
+  </ion-row>
+  <ion-card class="ion-no-margin">
+    <ion-card-content>
+      <ion-row>
+        <ion-col class="revision-controls" size-xl="12" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+          <ion-row>
+            <ion-col size-xl="12" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+              <ion-item lines="none">
+                <ion-range *ngIf="revisions.length > 1" color="success" min="1" max="{{revisions.length}}" step="1"
+                  snaps="true" (ionChange)="getRevisionsOnChange($event)" pin color="dark">
+                </ion-range>
+              </ion-item>
+            </ion-col>
+            <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+              <ion-item lines="none">
+                <ion-label>Show Differences</ion-label>
+                <select #diffMethod (change)='onDiffMethodUpdated(diffMethod.value)'>
+                  <option value="SideBySide">Side By Side</option>
+                  <option value="LineByLine">Line By Line</option>
+                </select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+              <ion-item lines="none">
+                <ion-label>Individual Toolbars</ion-label>
+                <ion-toggle [(ngModel)]="diffShowToolbar"></ion-toggle>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+              <ion-item lines="none">
+                <ion-label>Hide Matching line</ion-label>
+                <ion-toggle [(ngModel)]="diffHideMatchingLines"></ion-toggle>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size-xl="12" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+          <div *ngIf="compare">
+            <ion-label class="label-heading">
+              Title
+            </ion-label>
+            <td-ngx-text-diff class="text-diff" [format]="diffFormat" [showToolbar]="diffShowToolbar"
+              [hideMatchingLines]="diffHideMatchingLines" [left]="selectedRevisionTitle" [right]="currentVersionTitle"
+              [synchronizeScrolling]="synchronize" (compareResults)="onCompareResults()">
+            </td-ngx-text-diff>
+          </div>
+
+          <div *ngIf="compare">
+            <ion-label class="label-heading">
+              Description
+            </ion-label>
+            <td-ngx-text-diff class="text-diff" [format]="diffFormat" [showToolbar]="diffShowToolbar"
+              [hideMatchingLines]="diffHideMatchingLines" [left]="selectedRevisionDescription"
+              [right]="currentVersionDescription" [synchronizeScrolling]="synchronize"
+              (compareResults)="onCompareResults()">
+            </td-ngx-text-diff>
+          </div>
+
+          <div *ngIf="compare">
+            <ion-label class="label-heading">
+              Body
+            </ion-label>
+            <td-ngx-text-diff class="text-diff" [format]="diffFormat" [showToolbar]="diffShowToolbar"
+              [hideMatchingLines]="diffHideMatchingLines" [left]="selectedRevisionBody" [right]="currentVersionBody"
+              [synchronizeScrolling]="synchronize" (compareResults)="onCompareResults()">
+            </td-ngx-text-diff>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

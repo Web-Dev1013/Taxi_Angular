@@ -1,0 +1,577 @@
+{
+    "sidebar" : [        
+
+            {
+                "title": "Memberships",
+                "type" : "container",
+                "link" : "/menu/pages/memberships",
+                "class" : "membership-sprite",
+                "children": [
+                    {
+                        "title" : "WOW Insiders",
+                        "type": "Product",
+                        "link" : "/menu/pages/memberships/wow-insiders",
+                        "HtmlView"  : "<h2>MemberShips/wow Insiders</h2>",
+                        "children" : [
+                          {
+                            "name" : "Options 101",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "Welcome from Wow! Please watch this video first!",
+                                "content" : "<h4 class=\"f-400\">Welcome from Wow!</h4><h2 class=\"f-900\">Please Watch this video First!</h2>"
+                              },
+                              {
+                                "name" : "Disclaimer Video",
+                                "content" : "<h2>Disclaimer Video</h2><video controls=\"controls\" preload=\"metadata\"  webkit-playsinline=\"webkit-playsinline\" class=\"videoPlayer\"><source src=\"../../../assets/videos/sample.mp4\" type=\"video/mp4\"/></video>"
+                              },
+                              {
+                                "name" : "Lesson 1 - Introduction",
+                                "content" : " <h2>Introduction</h2><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.It has survived not only five centuries, but also the leap intoelectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "Intro to Weekly Options",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab2 link 1"
+                              },
+                              {
+                                "name" : "tab2 link 2"
+                              },
+                              {
+                                "name" : "tab2 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "The W.O.W Foundation",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab3 link 1"
+                              },
+                              {
+                                "name" : "tab3 link 2"
+                              },
+                              {
+                                "name" : "tab3 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "Windfall Weapons",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab4 link 1"
+                              },
+                              {
+                                "name" : "tab4 link 2"
+                              },
+                              {
+                                "name" : "tab4 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "Webinar Replays",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab5 link 1"
+                              },
+                              {
+                                "name" : "tab5 link 2"
+                              },
+                              {
+                                "name" : "tab5 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "Windfall Up",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab6 link 1"
+                              },
+                              {
+                                "name" : "tab6 link 2"
+                              },
+                              {
+                                "name" : "tab6 link 3"
+                              }
+                            ]
+                          }
+                  
+                    ]
+                    },
+                    {
+                        "title" : "Maggie Mastermind",
+                        "type": "Product",
+                        "link" : "/menu/pages/memberships/maggie-mastermind",
+                        "children" : [
+                          {
+                            "name" : "maggie 1",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "Welcome from Mastermind! Please watch this video first!",
+                                "content" : "<h4 class=\"f-400\">Welcome from Preston!</h4><h2 class=\"f-900\">Please Watch this video First!</h2>"
+                              },
+                              {
+                                "name" : "Disclaimer Video",
+                                "content" : "<h2>Disclaimer Video<\/h2><iframe src=\"https://player.vimeo.com/video/76979871?quality=720p\" width=\"640\" height=\"360\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen><\/iframe>"
+                              },
+                              {
+                                "name" : "Lesson 1 - Introduction",
+                                "content" : " <h2>Maggie Mastermind</h2><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.It has survived not only five centuries, but also the leap intoelectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "maggie 2",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab2 link 1"
+                              },
+                              {
+                                "name" : "tab2 link 2"
+                              },
+                              {
+                                "name" : "tab2 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "maggie 3",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab3 link 1"
+                              },
+                              {
+                                "name" : "tab3 link 2"
+                              },
+                              {
+                                "name" : "tab3 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "maggie 4",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab4 link 1"
+                              },
+                              {
+                                "name" : "tab4 link 2"
+                              },
+                              {
+                                "name" : "tab4 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "maggie 5",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab5 link 1"
+                              },
+                              {
+                                "name" : "tab5 link 2"
+                              },
+                              {
+                                "name" : "tab5 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "maggie 6",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab6 link 1"
+                              },
+                              {
+                                "name" : "tab6 link 2"
+                              },
+                              {
+                                "name" : "tab6 link 3"
+                              }
+                            ]
+                          }
+                  
+                    ]
+                    },
+                    {
+                        "title" : "pirate picks",
+                        "type": "Product",
+                        "link" : "/menu/pages/memberships/pirate-picks",
+                        "children" : [
+                          {
+                            "name" : "pirate 1",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "Welcome from Pirates! Please watch this video first!",
+                                "content" : "<h4 class=\"f-400\">Welcome from Preston!</h4><h2 class=\"f-900\">Please Watch this video First!</h2>"
+                              },
+                              {
+                                "name" : "Disclaimer Video",
+                                "content" : "<h2>Disclaimer Video</h2><video controls=\"controls\" preload=\"metadata\"  webkit-playsinline=\"webkit-playsinline\" class=\"videoPlayer\"><source src=\"../../../assets/videos/sample.mp4\" type=\"video/mp4\"/></video>"
+                              },
+                              {
+                                "name" : "Lesson 1 - Introduction",
+                                "content" : " <h2>Pirate specials</h2><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.It has survived not only five centuries, but also the leap intoelectronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "pirate 2",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab2 link 1"
+                              },
+                              {
+                                "name" : "tab2 link 2"
+                              },
+                              {
+                                "name" : "tab2 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "pirate 3",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab3 link 1"
+                              },
+                              {
+                                "name" : "tab3 link 2"
+                              },
+                              {
+                                "name" : "tab3 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "pirate 4",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab4 link 1"
+                              },
+                              {
+                                "name" : "tab4 link 2"
+                              },
+                              {
+                                "name" : "tab4 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "pirate 5",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab5 link 1"
+                              },
+                              {
+                                "name" : "tab5 link 2"
+                              },
+                              {
+                                "name" : "tab5 link 3"
+                              }
+                            ]
+                          },
+                          {
+                            "name" : "pirate 6",
+                            "hasSubcategory" : true,
+                            "options"  : [
+                              {
+                              "title":"link 1"
+                              },
+                              {
+                                "title":"link 2"
+                              },
+                              {
+                                "title":"link 3"
+                              }
+                            ],
+                            "children" : [
+                              {
+                                "name" : "tab6 link 1"
+                              },
+                              {
+                                "name" : "tab6 link 2"
+                              },
+                              {
+                                "name" : "tab6 link 3"
+                              }
+                            ]
+                          }
+                  
+                    ]
+                    }
+
+                ],
+                "HtmlView"  : "<h2>MemberShips</h2>"
+            },
+            {
+                "title": "Advanced training",
+                "type" : "container",
+                "link" : "/menu/pages/advanced-training",
+                "class" : "training-sprite",
+                "children": [
+                    {
+                        "title" : "NA",
+                        "type": "Product",
+                        "link" : "/products/wow-insider"
+                    }
+                ],
+                "HtmlView"  : "<h2>Advanced Training</h2>"
+            },
+            {
+                "title": "Events",
+                "type" : "container",
+                "link" : "/menu/pages/events",
+                "class" : "events-sprite",
+                "children": [
+                    {
+                        "title" : "Event Child 1",
+                        "type": "Product",
+                        "link" : "/products/wow-insider"
+                    },
+                    {
+                        "title" : "Event Child 2",
+                        "type": "Product",
+                        "link" : "/products/wow-insider"
+                    },
+                    {
+                        "title" : "Event Child 3",
+                        "type": "Product",
+                        "link" : "/products/wow-insider"
+                    }
+                ],
+                "HtmlView"  : "<h2>Events</h2>"
+            },
+            {
+                "title": "Dicussion Area",
+                "type" : "container",
+                "link" : "/menu/pages/discussion-area",
+                "class" : "discussion-sprite",
+                "children": [
+                    {
+                        "title" : "NA",
+                        "type": "Product",
+                        "link" : ""
+                    }
+                ],
+                "HtmlView"  : "<h2>Discussion area</h2>"
+            },
+            {
+                "title": "Support",
+                "type" : "direct",
+                "link" : "/menu/pages/support",
+                "class" : "support-sprite",
+                "children": null,
+                "HtmlView"  : "<h2>support</h2>"
+            }
+    ]
+}

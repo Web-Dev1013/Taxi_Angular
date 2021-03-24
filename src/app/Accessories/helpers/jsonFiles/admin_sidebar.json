@@ -1,0 +1,133 @@
+[
+
+{
+    "title": "Users",
+    "type" : "direct",
+    "link" : "/users",
+    "class" : "dashboard-sprite",
+    "children" : null,
+    "HtmlView" : "<h2>Users</h2>"
+},
+{
+    "title": "Products",
+    "type" : "direct",
+    "link" : "/products",
+    "class" : "dashboard-sprite",
+    "children" : null,
+    "product_types" : [
+        {
+            "title" : "The Foundation",
+            "visibility" : "Locked",
+            "children" : [
+                {
+                    "title" : "The Money Press Method"
+                },
+                {
+                    "title" : "The 1% Solution"
+                }
+            ]
+        },
+        {
+            "title" : "Memberships",
+            "visibility" : "Locked",
+            "children" : [
+                {
+                    "title" : "WOW INSIDERS",
+                    "link" : "wow-insiders",
+                    "visibility" : "locked",
+                    "description" : "hello wow insiders",
+                    "categories": [
+                        {
+                            "title" : "Options 101",
+                            "description": "this is option 101",
+                            "visibility" : "locked",
+                            "content" : [
+                                {
+                                    "title": "welcome to Preston",
+                                    "description": "this is preston",
+                                    "visibility" : "locked"
+                                },
+                                {
+                                    "title" : "this is dummy preston",
+                                    "description" : "hello dummy preston",
+                                    "visibility" : "locked"
+                                }
+                            ]
+                        },
+                        {
+                            "title" : "Intro to weekly options",
+                            "description": "this is Intro to weekly options"
+                        },
+                        {
+                            "title" : "The WOW Foundation",
+                            "description": "this is The WOW Foundation"
+                        },
+                        {
+                            "title" : "Windfall Weapons",
+                            "description": "this is Windfall Weaponsn"
+                        },
+                        {
+                            "title" : "Webinar Replays",
+                            "description": "this is Webinar Replays"
+                        },
+                        {
+                            "title" : "Windfall updates",
+                            "description": "this is Windfall updates"
+                        },
+                        {
+                            "title" : "Current Trades",
+                            "description": "this is Current Trades"
+                        }
+                    ]
+                },
+                {
+                    "title" : "Maggie MasterMind Project",
+                    "visibility" : "locked",
+                    "categories": [
+                        {
+                            "title" : "cat 1"
+                        },
+                        {
+                            "title" : "cat 2"
+                        },
+                        {
+                            "title" : "cat 3"
+                        }]
+                     
+                },
+                {
+                    "title" : "Pirate Picks"
+                }
+            ]
+        },
+        {
+            "title" : "Advanced Training",
+            "visibility" : "Locked",
+            "children" : [
+                {
+                    "title" : "Small Account Mastery"
+                },
+                {
+                    "title" : "WOW Home Study Course"
+                },
+                {
+                    "title" : "Next Steps Course"
+                },
+                {
+                    "title" : "One-On-One Mentoring"
+                }
+            ]
+        },
+        {
+            "title" : "Events",
+            "visibility" : "Locked",
+            "children" : [
+                {
+                    "title" : "Pirate's 2-Day Retreat"
+                }
+            ]
+        }
+    ],
+    "HtmlView" : "<h2>Products</h2>"
+}
+]

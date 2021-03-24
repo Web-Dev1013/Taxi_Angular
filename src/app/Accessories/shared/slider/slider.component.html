@@ -1,0 +1,20 @@
+
+
+  <ion-row class="swiper-tabs">
+    <ion-col size="12" class="ion-no-padding ion-flex custom-swiper">
+      <ion-slides pager="false" [options]="slideOptsTwo" #slideWithNav2
+        (ionSlideDidChange)="SlideDidChange(appSlider,slideWithNav2)">
+        <ion-slide *ngFor="let s of appSlider.slidesItems" [class.active]="category._id === s._id" (click)="clickedCategory(s)" [title]="s.title">
+          <span>{{s.title | titleOutput }}</span>
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+    <ion-col class="slider-nav-controls">
+      <span class="slider-nav arrow-prev" *ngIf="appSlider.slidesItems.length > slideOptsTwo.slidesPerView" (click)="slidePrev(appSlider,slideWithNav2)">
+        <div class="prev-icon-custom custon-nav" [class.disabled]="appSlider.isBeginningSlide"></div>
+      </span>
+      <span class="slider-nav arrow-next" *ngIf="appSlider.slidesItems.length > slideOptsTwo.slidesPerView" (click)="slideNext(appSlider,slideWithNav2)">
+        <div class="next-icon-custom custon-nav" [class.disabled]="appSlider.isEndSlide "></div>
+      </span>
+    </ion-col>
+  </ion-row>

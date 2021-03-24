@@ -1,0 +1,21 @@
+<form [formGroup]="editorForm">
+  <editor
+    [apiKey]="tinyEditorKey"
+    formControlName="editor"
+    [init]="tinymceInit"
+    (onKeyUp)="sendValueToParent($event)"
+    (onBlur)="sendValue()"
+    #editor
+    >
+  </editor>
+
+  <!-- <ion-item lines="inset" class="ion-no-padding">
+    <ion-textarea formControlName="editor"></ion-textarea>
+  </ion-item> -->
+  <span class="text-danger" *ngIf="touched && errorControl.editor.errors?.required">
+    Content Is required
+  </span>
+</form>
+
+
+<!-- <editor apiKey="test" [init]="{plugins: 'link'}"></editor> -->

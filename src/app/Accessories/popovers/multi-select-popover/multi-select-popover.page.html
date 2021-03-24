@@ -1,0 +1,11 @@
+
+<ion-list>
+  <ion-button (click)="close()" slot="end"  >close</ion-button>
+  <ion-searchbar (ionInput)="onInputChange()" [(ngModel)]="input"></ion-searchbar>
+  
+  <ion-item *ngFor="let item of filteredList; let i = index">
+    <ion-label>{{item.name}}</ion-label>
+    <!-- <ion-radio [value]="item" (ionSelect)="onItemClick(item)"></ion-radio> -->
+    <ion-checkbox slot = "start" [value]="item" (click)="updateCucumber(item,i)"></ion-checkbox>
+  </ion-item>
+</ion-list>

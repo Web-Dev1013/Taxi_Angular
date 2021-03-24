@@ -1,0 +1,187 @@
+<app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar>
+  <div class="breadcrumbs">
+    <ul>
+      <li><a [routerLink]="['/products']"><span>Product groups</span></a></li>
+      <li><a [routerLink]="['/products']"><span>products</span></a></li>
+      <li><span>Edit</span></li>
+    </ul>
+  </div>
+  <div class="page-heading page-heading-btn">
+    <h2>Edit Product</h2>
+    <ion-button color="medium" fill="outline" class="main-back-btn" size="default" (click)="back()">
+      <ion-icon name="chevron-back-outline" size="small" class="mr-2"></ion-icon>Back
+    </ion-button>
+  </div>
+  <form (ngSubmit)="onClickSubmit()" padding-right [formGroup]="productForm">
+    <ion-row>
+      <ion-col class="pr-10" size-xl="8" size-lg="7" size-md="12" size-sm="12" size-xs="12">
+        <ion-card class="ion-no-margin">
+          <ion-card-content class="ion-no-padding">
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Title</ion-label>
+              <ion-input formControlName="title"></ion-input>
+            </ion-item>
+            <span class="error" *ngIf="touched && errorControl.title.errors?.required">
+              This field cannot be empty
+            </span>
+            <span class="error" *ngIf="errorControl.title.errors?.maxlength">
+              Title should be less than 50 characters
+            </span>
+            <span class="error" *ngIf="errorControl.title.errors?.serverError">
+              {{serverError.title}}
+          </span>
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea rows="5" formControlName="description"></ion-textarea>
+            </ion-item>
+            <span class="error" *ngIf="touched && errorControl.description.errors?.required">
+              This field cannot be empty
+            </span>
+            <span class="error" *ngIf="errorControl.description.errors?.maxlength">
+              Description should be less than 2000 characters
+            </span>
+            <span class="error" *ngIf="errorControl.description.errors?.serverError">
+              {{serverError.descrition}}
+            </span>
+            <ion-item>
+              <ion-label>Select Product Group</ion-label>
+              <ion-select line="none" class="ion-no-padding" placeholder="{{selectedType}}"
+                [interfaceOptions]="customPopoverOptions" okText="Okay" cancelText="Dismiss"
+                formControlName="productType" interface="popover">
+                <ion-select-option *ngFor="let type of productTypes" value="{{type.slug}}">{{type.title}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-card class="ion-no-margin ion-no-padding listing-card mt-4">
+              <ion-card-content>
+                <div class="page-heading-2">
+                  <h2>Categories</h2>
+                  <ion-button color="secondary" slot="end" size="small" class="heading-button" (click)="addCategory()">
+                    <ion-icon name="add-outline" size="small">
+                    </ion-icon>
+                  </ion-button>
+                </div>
+                <ion-list class="ion-no-padding">
+                  <ion-reorder-group (ionItemReorder)="onReorderItems($event)" disabled="false">
+                    <ion-item-group *ngFor="let detail of categories">
+                      <ion-item class="ion-no-padding">
+                        <ion-label class="d-flex align-items-center">
+                          <ion-reorder></ion-reorder>
+                          <h2 class="ml-1">{{detail.title}} </h2>
+                          <ion-icon class="icon-button ml-auto" size="medium" slot="icon-only" name="create-outline"
+                            (click)="getCategoryDetail(detail)"></ion-icon>
+                          <ion-icon class="icon-button delete" size="medium" slot="icon-only" name="trash-outline"
+                            (click)="deleteCategory(detail)"></ion-icon>
+                        </ion-label>
+                      </ion-item>
+                      <ng-container *ngIf="detail._id === selectedId && openAccordian ">
+                        <ion-item-group class="accordion-post">
+                          <ion-item lines="none" *ngFor="let childcategory of childCategories"
+                            (click)="getChildCategoryDetail(detail,childcategory)">
+                            <ion-label class="d-flex align-items-center pt-1 pb-1">
+                              <h2>{{childcategory.title}}</h2>
+                              <ion-icon class="icon-button ml-auto" size="medium" slot="icon-only"
+                                name="create-outline"></ion-icon>
+                            </ion-label>
+                          </ion-item>
+                        </ion-item-group>
+                      </ng-container>
+
+                    </ion-item-group>
+                  </ion-reorder-group>
+
+                </ion-list>
+                <!-- <ion-button color="medium" size="default" class="mt-2" (click)="showIonSelect($event)">
+                    <ion-icon name="add-outline" size="small" class="mr-2" (click)="showIonSelect($event)">
+                    </ion-icon>
+                  </ion-button> -->
+                <!-- <ion-row>
+                    <ion-select (ionChange)='getValueFromCreate($event)' #createCategory line="none"
+                      class="ion-no-padding" [interfaceOptions]="customPopoverOptions" okText="Okay"
+                      cancelText="Dismiss" interface="popover">
+                      <ion-select-option value="post">Add Post</ion-select-option>
+                      <ion-select-option value="subcategory">Add Sub Category</ion-select-option>
+                    </ion-select>
+                  </ion-row> -->
+              </ion-card-content>
+            </ion-card>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="pl-10 ion-no-padding" size-xl="4" size-lg="5" size-sm="12" size-md="12" size-xs="12">
+        <ion-card class="ion-no-margin side-card">
+          <ion-card-content>
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-radio-group formControlName="status" (ionChange)="changeStateCallback($event)">
+                <ion-list-header class="ion-no-padding">
+                  <ion-label>visibility</ion-label>
+                </ion-list-header>
+                <ion-row>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Published</ion-label>
+                      <ion-radio color="secondary" slot="start" value="published"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Draft</ion-label>
+                      <ion-radio color="secondary" slot="start" value="draft"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Locked</ion-label>
+                      <ion-radio color="secondary" slot="start" value="locked"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-radio-group>
+            </ion-item>
+            <span class="error" *ngIf="errorControl.status.errors?.serverError">
+              {{serverError.status}}
+            </span>
+
+            <div *ngIf="openEditor">
+              <div class="tags-wrapper">
+                <ion-label position="floating">Infusionsoft Tags</ion-label>
+                <ion-searchbar id="search" class="search ion-no-padding" (ionFocus)="searchBarOnFocus($event)" (ionChange)="onSearchTerm($event)"
+                  placeholder="Search Tags">
+                </ion-searchbar>
+                <div class="taglist-search" *ngIf="showTagsList" appScrollbar [directInject]="true">
+                  <div style = "height : 25px">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close" (click)="hideTagList()">×</a>
+                  </div>
+                  <p (click)="clickedTag(tag.name)" [class.selected]="tags.indexOf(tag.name) >= 0" *ngFor="let tag of tagsList">{{tag.name}}</p>
+                </div>
+                <div class="editor-tag" (click)="focusTagInput()" appScrollbar [directInject]="true">
+                  <span class="tag-item" *ngFor="let tag of tags">
+                    {{tag}}
+                    <span class="remove-tag" (click)="removeTag(tag)">×</span>
+                  </span>
+                  <input #tagInput type="text" class="input-tag" (keyup)="onKeyUp($event)" formControlName="tags"
+                    (onChange)="onSearchTerm($event)" appScrollbar [directInject]="true">
+
+                </div>
+                <span class="error" *ngIf="tags.length === 0">
+                  Tags are necessary for locked content
+                </span>
+              </div>
+
+              <ion-item>
+                <app-editor #tinyProductEdit [editorData]="lockedContent" (editorDataToParent)="getEditorValue($event)"></app-editor>
+              </ion-item>
+              <span class="error" *ngIf="errorControl.formModel.errors?.required">
+                Please enter locked content
+              </span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-button [disabled]="disabled || !productForm.valid" size="default" slot="end" (click)="onClickSubmit()" (keyup.enter)="onClickSubmit()">Submit
+    </ion-button>
+  </form>
+</ion-content>

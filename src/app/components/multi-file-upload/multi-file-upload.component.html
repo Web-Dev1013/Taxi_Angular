@@ -1,0 +1,26 @@
+<div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader" class="drop-zone">
+  Drop files here...
+</div>
+
+
+<h2>Files: {{ uploader?.queue?.length }}</h2>
+<div *ngIf = "!uploader?.queue?.length else showButton">
+  <div class="file-input-container">
+    <label>
+      <input type="file" ng2FileSelect [uploader]="uploader"/>
+      Add Files
+    </label>
+  </div>
+</div>
+<ng-template #showButton>
+  <ion-list>
+    <ion-item *ngFor="let item of uploader.queue">
+      <ion-label>
+        {{ item?.file?.name }}
+      </ion-label>
+    </ion-item>
+</ion-list>
+  <ion-button (click)="lk()">
+    Delete and Upload Again
+  </ion-button>
+</ng-template>

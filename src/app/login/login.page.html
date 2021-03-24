@@ -1,0 +1,36 @@
+<ion-content padding="true">
+  <ion-row class="ion-justify-content-center auth-layout">
+    <ion-col size-sm="12" size-lg="4">
+      <img class="app-logo" src="assets/icon/application-logo.png" alt="" />
+      <div class="login-card">
+        <ion-card>
+          <ion-card-content no-padding>
+            <form  padding-right [formGroup]="loginForm">
+              <ion-item lines="inset" class="ion-no-padding">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input formControlName="username" (keyup.enter)="onClickSubmit()"></ion-input>
+              </ion-item>
+              <span class="error" *ngIf="touched && errorControl.username.errors?.required">
+                This field cannot be empty
+              </span>
+              <span class="error" *ngIf="errorControl.username.errors?.pattern">
+                Enter Correct Email
+              </span>
+
+              <ion-item lines="inset" class="ion-no-padding">
+                <ion-label position="floating">Password</ion-label>
+                <ion-input formControlName="password" type="password" (keyup.enter)="onClickSubmit()"></ion-input>
+              </ion-item>
+              <span class="error" *ngIf="touched && errorControl.password.errors?.required">
+                This field cannot be empty
+              </span>
+              <ion-item lines="none" class="ion-item-right-margin default-button ion-no-padding">
+                <ion-button size="default" slot="end" (click)="onClickSubmit()" (keyup.enter)="onClickSubmit()" [disabled]="!loginForm.valid">Login</ion-button>
+              </ion-item>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

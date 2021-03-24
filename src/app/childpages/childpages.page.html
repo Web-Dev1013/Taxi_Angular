@@ -1,0 +1,369 @@
+<app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar>
+  <h2 class="page-heading">{{productGroupTitle}}<span style="margin-left: 4px; margin-right: 4px;">/</span><span class="title">{{title}}</span></h2>
+
+  <ng-container *ngIf="!islockedProduct else showLockedProductData">
+    <ng-template #noCategories>
+      <div class="no-data">
+        <img src="assets/icon/no-data.png" alt="No categories to display" />
+        <h3>Sorry! No categories to display</h3>
+      </div>
+    </ng-template>
+
+    <ng-container *ngIf="!productHasNoCategories else noCategories">
+      <ion-grid>
+        <ng-container *ngIf="productCategories">
+          <app-slider [categories]="productCategories" [category]="selectedCategory" (selectedCategory)="selectCategory($event)"></app-slider>
+        </ng-container>
+
+        <ion-row class="tab-listing-content" id="referenceDiv">
+          <ion-col size="12" class="ion-no-padding">
+            <ng-container *ngIf="lockedCategory">
+              <div class="locked-content border-0">
+                <h2 [innerHtml]="lockedSlideContent | keepHtml"></h2>
+              </div>
+            </ng-container>
+            <div class="d-flex h-100 tab-wrapper" *ngIf="!lockedSlide else showlockedSlideContent">
+              <ng-container *ngIf="hasContents && !lockedCategory else noContents">
+                <div class="tab-sidebar">
+                  <ng-container>
+
+                    <ion-item-group *ngFor="let content of categoryContents" [class.active]="slugForContent === content.slug"
+                      (click)="initiateContentDisplay(content)" [title]="content.title">
+
+                      <ng-container *ngIf="content.locked else mainContent">
+                        <div class="tab-sidebar-label">
+                          <ion-label class="d-flex align-items-center">{{content.title | titleOutput }}</ion-label>
+                        </div>
+                      </ng-container>
+
+                      <ng-template #mainContent>
+                        <div class="tab-sidebar-label d-flex justify-content-between" [title]="content.title">
+                          <ion-label class="d-flex align-items-center" appScrollbar [directInject]='true'>
+                            {{content.title | titleOutput }}
+                          </ion-label>
+                          <ion-icon class="accordion-icon"
+                            *ngIf="(isContentASubcategory(content) && content.posts.length > 0)"
+                            [name]="(slugForContent === content.slug) ? 'chevron-down-outline' : 'chevron-forward-outline'">
+                          </ion-icon>
+                        </div>
+                        <div class="tab-sidebar-submenu"
+                          *ngIf="slugForContent === content.slug && isContentASubcategory(content) && content.posts.length > 0">
+                          <ion-item>
+                            <ion-list>
+                              <ion-item *ngFor="let post of content.posts" [class.active]="slugForSubContent === post.slug"
+                                [title]="post.title" appScrollbar [directInject]='true'
+                                (click)="$event.stopPropagation();initiateSubContentDisplay(post, content);">
+                                {{post.title | titleOutput }}
+                              </ion-item>
+                            </ion-list>
+                          </ion-item>
+                        </div>
+                      </ng-template>
+                      <ng-template #elseblock1>
+                        <ng-container>
+                          <ng-container *ngIf="!subpostLocked else lockedpost">
+                            <ng-container *ngIf="!isSubcategory">
+                              <h2 class="f-700" *ngIf="hasContents && subPostTitle">{{subPostTitle}}</h2>
+                              <h4 class="f-400" *ngIf="hasContents && subPostDescription">{{subPostDescription}}</h4>
+                              <p *ngIf="hasContents && subCategoryPostBody" [innerHtml]="subCategoryPostBody  | keepHtml ">
+                              </p>
+                              <!-- here -->
+                            </ng-container>
+                          </ng-container>
+                          <ng-template #lockedpost>
+                            <h4 class="f-400">{{this.subpostLockedContent}}</h4>
+                          </ng-template>
+                        </ng-container>
+                      </ng-template>
+                    </ion-item-group>
+                  </ng-container>
+                </div>
+
+                <div class="tab-sidebar-content">
+                  <div class="no-data border-0" *ngIf="!isContentDisplayed">
+                    <img src="assets/icon/no-data.png" alt="" />
+                    <h3>No posts to display</h3>
+                  </div>
+                  <ng-container *ngIf="isTypeForPost(contentType) else elseblock1">
+                    <ng-container *ngIf="isContentDisplayed && !isSubcategoryLocked else lockeSubcategory">
+                      <h2 class="f-700" *ngIf="hasContents">{{postTitle}}</h2>
+                      <h4 class="f-400" *ngIf="hasContents">{{postDescription}}</h4>
+                      <p *ngIf="hasContents && postBody" [innerHtml]="postBody | keepHtml"></p>
+                    </ng-container>
+                    <ng-template #lockeSubcategory>
+                      <h4 class="f-400">{{this.subcategoryLockedContent}}</h4>
+                    </ng-template>
+
+                  </ng-container>
+                  <ng-template #elseblock1>
+                    <ng-container>
+                      <ng-container *ngIf="!subpostLocked else lockedpost">
+                        <h2 class="f-700" *ngIf="hasContents && subPostTitle && isContentDisplayed">{{subPostTitle}}</h2>
+                        <h4 class="f-400" *ngIf="hasContents && subPostDescription && isContentDisplayed">
+                          {{subPostDescription}}</h4>
+                        <p *ngIf="hasContents && subCategoryPostBody && isContentDisplayed"
+                          [innerHtml]="subCategoryPostBody | keepHtml"></p>
+                      </ng-container>
+                      <ng-template #lockedpost>
+                        <h4 class="f-400">{{this.subpostLockedContent}}</h4>
+                      </ng-template>
+                    </ng-container>
+                  </ng-template>
+
+                  <!-- Comment section............... -->
+
+                  <ng-container *ngIf="!commentDisabled">
+                    <div class="container cmt-container"
+                      *ngIf="isTypeForPost(contentType) || (isTypeForSubCategory(contentType) && isContentDisplayed)">
+                      <div class=" log-cmt-title" style="padding-top: 15px;">
+                        <div class="title-flag">
+                          <h6 class="mb-0 font-weight-bold">Comments</h6>
+                        </div>
+                        <div class=" title-flag" style="color: grey;">
+                          <h6 style="font-size: 12px;" class="mb-0 font-weight-bold">Comments( {{totalCommentsCount}} ) </h6>
+                        </div>
+                      </div>
+                      <div>
+                        <form class="comment-form">
+                          <div class="row">
+                            <div class="col-md-12" style="margin-top: 10px;">
+                              <textarea class="comment-textArea" name="commentText" id="commentText" #cmtText
+                                placeholder="Post your comment here" (keyup)="setCommentFlag()"
+                                [(ngModel)]="postComment.commentText"></textarea>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <ion-button size="default" slot="end" [disabled]="!isPostCommentEntered"
+                                (click)="postNewComment(postComment)">Comment</ion-button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <ng-container>
+                        <ul class="cmt-ul pl-0">
+                          <li *ngFor="let comment of commentList;let i=index;let last = last">
+                            <div class="main-top">
+                              <div class="cmt-user">
+                                <img ngxGravatar [email]="comment.authorId.email" size="45"
+                                  src="{{baseUrl}}{{comment.authorId.image}}" />
+                              </div>
+                              <div class="main-cmt ml-0">
+                                <div class="log-cmt-title">
+                                  <div class="title-flag">
+                                    <h6 class="cmt-author"> <strong>{{comment.authorId.firstName}}</strong>
+                                    </h6>
+                                  </div>
+                                  <div class="cmt-flg"
+                                    [ngClass]='{"cmt-marked-flg": comment.flag | inArray:currentUserId}'
+                                    (click)="markFlag(comment._id)">
+                                    <ion-icon tooltip="Mark as Inappropriate" name="flag" class="cmt-flg">
+                                    </ion-icon><span>Flag</span>
+                                  </div>
+                                </div>
+                                <div class="cmt-dec  mr-0">
+                                  <app-read-more *ngIf="commentList" [content]="comment.commentText"
+                                    [completeWords]="true">
+                                  </app-read-more>
+                                </div>
+                                <span class="parentTime">
+                                  {{comment.postedDate | moment}}
+                                  <mark>{{comment.postedDate | date : 'long'}}</mark>
+                                </span>
+                                <div class="cmt-btn-action">
+                                  <div *ngIf="comment.doReply" class="cmt-btn-holder">
+                                    <ion-textarea placeholder="Reply comment" type="text" name="'cmt-reply-'i"
+                                      id="cmt-Reply" [(ngModel)]="commentTextReply"
+                                      (keypress)="isEnterPressed(comment, $event)"></ion-textarea>
+                                    <ion-button class="cmt-btn cmt-btn-save" [class.disable-btn]="!commentTextReply" [disabled]="!commentTextReply"
+                                      (click)="isUpdateComment? editComment(comment) :replyInComment(comment)">Save</ion-button>
+                                      <ion-button class="cmt-btn cmt-btn-cancel" (click)="changeReplyFlag(i)">Cancel</ion-button>
+                                  </div>
+                                  <div class="reply-button-space" *ngIf="!comment.doReply">
+                                    <a class="cmt-reply" (click)="setDoReplyFlags(i)">Reply
+                                      <ion-icon name="chatbox-outline"></ion-icon>
+                                    </a>
+                                    <p></p>
+                                    <a class="cmt-reply cmt-reply-edit"
+                                      *ngIf="comment.authorId && currentUserId == comment.authorId._id"
+                                      (click)="setEditCommentData(comment,i)">Edit<ion-icon name="create-outline">
+                                      </ion-icon></a>
+                                    <p></p>
+                                    <a class="cmt-reply cmt-reply-delete"
+                                      *ngIf="comment.authorId && currentUserId == comment.authorId._id"
+                                      (click)="openConfirmationDialog(comment)">Delete<ion-icon name="trash-outline">
+                                      </ion-icon></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="sub-comment">
+                              <ul>
+                                <li *ngFor="let commentChild of comment.children;let j=index;">
+                                  <div class="main-top">
+                                    <div class="cmt-user">
+                                      <img ngxGravatar [email]="commentChild.authorId.email" size="45"
+                                        src="{{baseUrl}}{{commentChild.authorId.image}}" />
+                                    </div>
+                                    <div class="main-cmt ml-0">
+                                      <div class="log-cmt-title">
+                                        <div class="title-flag">
+                                          <h6 class="cmt-author">
+                                            <strong>{{commentChild.authorId.firstName}}</strong>
+                                          </h6>
+                                        </div>
+                                        <div class="cmt-flg"
+                                          [ngClass]='{"cmt-marked-flg": commentChild.flag | inArray:currentUserId}'
+                                          (click)="markFlag(commentChild._id)">
+                                          <ion-icon tooltip="Mark as Inappropriate" name="flag" class="cmt-flg">
+                                          </ion-icon><span>Flag</span>
+                                        </div>
+                                      </div>
+
+                                      <div class="cmt-dec">
+                                        <app-read-more *ngIf="commentList" [content]="commentChild.commentText"
+                                          [completeWords]="true">
+                                        </app-read-more>
+                                      </div>
+                                      <span class="parentTime">
+                                        {{commentChild.postedDate | moment}}
+                                        <mark class="comment-child">{{commentChild.postedDate | date :
+                                          'long'}}</mark>
+                                      </span>
+
+                                      <div class="cmt-btn-action">
+                                        <div *ngIf="commentChild.doReply" class="cmt-btn-holder">
+                                          <ion-textarea placeholder="Reply comment" id="cmt-Reply" type="text"
+                                            (keypress)="isEnterPressed(commentChild, $event)"
+                                            [(ngModel)]="commentTextReply"></ion-textarea>
+                                          <ion-button class="cmt-btn cmt-btn-save" [class.disable-btn]="!commentTextReply" [disabled]="!commentTextReply"
+                                            (click)="isUpdateComment? editComment(commentChild) :replyInComment(commentChild);">Save</ion-button>
+                                            <ion-button class="cmt-btn cmt-btn-cancel"
+                                              (click)="changeReplyFlag(i,j)">Cancel</ion-button>
+
+                                        </div>
+
+                                        <div class="reply-button-space" *ngIf="!commentChild.doReply">
+                                          <a class="cmt-reply" (click)="setDoReplyFlags(i,j)">Reply<ion-icon
+                                              name="chatbox-outline"></ion-icon></a>
+                                          <p></p>
+                                          <a class="cmt-reply cmt-reply-edit"
+                                            *ngIf="commentChild.authorId && currentUserId == commentChild.authorId._id"
+                                            (click)="setEditCommentData(commentChild,i,j)">Edit<ion-icon
+                                              name="create-outline"></ion-icon></a>
+                                          <p></p>
+                                          <a class="cmt-reply cmt-reply-delete"
+                                            *ngIf="commentChild.authorId && currentUserId == commentChild.authorId._id"
+                                            (click)="openConfirmationDialog(commentChild)">Delete<ion-icon
+                                              name="trash-outline"></ion-icon></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="sub-sub-comment">
+                                    <ul>
+                                      <li *ngFor="let commentChild1 of commentChild.children;let k=index;">
+                                        <div class="main-top">
+                                          <div class="cmt-user">
+                                            <img ngxGravatar [email]="commentChild1.authorId.email" size="45"
+                                              src="{{baseUrl}}{{commentChild1.authorId.image}}" />
+                                          </div>
+                                          <div class="main-cmt ml-0">
+                                            <div class="log-cmt-title">
+                                              <div class="title-flag">
+                                                <h6 class="cmt-author">
+                                                  <strong>{{commentChild1.authorId.firstName}}</strong>
+                                                </h6>
+                                              </div>
+                                              <div class="cmt-flg" (click)="markFlag(commentChild1._id)"
+                                                [ngClass]='{"cmt-marked-flg": commentChild1.flag | inArray:currentUserId}'>
+                                                <ion-icon tooltip="Mark as Inappropriate" name="flag" class="cmt-flg">
+                                                </ion-icon><span>Flag</span>
+                                              </div>
+                                            </div>
+                                            <div class="cmt-dec">
+                                              <app-read-more *ngIf="commentList" [content]="commentChild1.commentText"
+                                                [completeWords]="true">
+                                              </app-read-more>
+                                            </div>
+                                            <span class="parentTime">
+                                              {{commentChild1.postedDate| moment}}
+                                              <mark class="comment-child1">{{commentChild1.postedDate | date
+                                                : 'long'}}</mark>
+                                            </span>
+                                            <div class="cmt-btn-action">
+                                              <div *ngIf="commentChild1.doReply" class="cmt-btn-holder">
+                                                <ion-textarea placeholder="Reply comment" id="cmt-Reply"
+                                                  (keypress)="isEnterPressed(commentChild1, $event)" type="text"
+                                                  [(ngModel)]="commentTextReply"></ion-textarea>
+                                                <ion-button class="cmt-btn cmt-btn-save" [class.disable-btn]="!commentTextReply" [disabled]="!commentTextReply"
+                                                  (click)="isUpdateComment? editComment(commentChild1) :replyInComment(commentChild1)">Save</ion-button>
+                                                  <ion-button class="cmt-btn cmt-btn-cancel"
+                                                    (click)="changeReplyFlag(i,j,k)">Cancel</ion-button>
+                                              </div>
+                                              <div class="reply-button-space" *ngIf="!commentChild1.doReply">
+                                                <a class="cmt-reply cmt-reply-edit"
+                                                  *ngIf="commentChild1.authorId && currentUserId == commentChild1.authorId._id"
+                                                  (click)="setEditCommentData(commentChild1,i,j,k)">Edit<ion-icon
+                                                    name="create-outline"></ion-icon></a>
+                                                <p></p>
+                                                <a class="cmt-reply cmt-reply-delete"
+                                                  *ngIf="commentChild1.authorId && currentUserId == commentChild1.authorId._id"
+                                                  (click)="openConfirmationDialog(commentChild1)">Delete<ion-icon
+                                                    name="trash-outline"></ion-icon></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+
+                  <!-- comment section over.........-->
+                </div>
+              </ng-container>
+              <ng-template #noContents>
+                <div class="no-data border-0" *ngIf="!hasContents">
+                  <img src="assets/icon/no-data.png" alt="" />
+                  <h3>No Contents to display in this Category</h3>
+                  <p>Try Something Else</p>
+                </div>
+              </ng-template>
+
+            </div>
+            <ng-template #showlockedSlideContent>
+              <div class="locked-content border-0" *ngIf="!lockedCategory">
+                <h2 [innerHtml]="lockedSlideContent | keepHtml"></h2>
+              </div>
+            </ng-template>
+
+
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ng-container>
+
+  </ng-container>
+  <ng-template #showLockedProductData>
+    <p class="locked-content" [innerHtml]="lockedProductContent | keepHtml"></p>
+  </ng-template>
+
+  <ion-infinite-scroll (ionInfinite)="loadPostCommentsInfinitely($event)">
+    <ion-infinite-scroll-content loadingSpinner="null">
+    </ion-infinite-scroll-content>
+    <!-- <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content> -->
+  </ion-infinite-scroll>
+
+</ion-content>

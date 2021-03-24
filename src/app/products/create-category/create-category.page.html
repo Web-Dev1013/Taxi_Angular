@@ -1,0 +1,140 @@
+<app-common></app-common>
+
+<ion-content class="ion-padding" appScrollbar>
+  <div class="breadcrumbs">
+    <ul>
+      <li><a (click)="back()"><span>Product</span></a></li>
+      <li><a (click)="back()"><span>Category</span></a></li>
+      <li><span>Create</span></li>
+    </ul>
+  </div>
+  <div class="page-heading page-heading-btn">
+    <h2>Add Category</h2>
+    <ion-button color="medium" fill="outline" class="main-back-btn" size="default" (click)="back()">
+      <ion-icon name="chevron-back-outline" size="small" class="mr-2"></ion-icon>Back
+    </ion-button>
+    <!-- <ion-icon class="close" name="close-circle-outline" (click)="close()"></ion-icon> -->
+  </div>
+  <form (ngSubmit)="onClickSubmit()" padding-right [formGroup]="productForm">
+    <ion-row>
+      <ion-col class="pr-10" size-xl="8" size-lg="7" size-md="12" size-sm="12" size-xs="12">
+        <ion-card class="ion-no-margin">
+          <ion-card-content class="ion-no-padding">
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Title</ion-label>
+              <ion-input formControlName="title"></ion-input>
+            </ion-item>
+            <span class="error" *ngIf="touched && errorControl.title.errors?.required">
+              This field cannot be empty
+            </span>
+            <span class="error" *ngIf="errorControl.title.errors?.maxlength">
+              Title should be less than 20 characters
+            </span>
+            <span class="error" *ngIf="errorControl.title.errors?.serverError">
+              {{serverError.title}}
+            </span>
+
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea rows="5" formControlName="description"></ion-textarea>
+            </ion-item>
+            <span class="error" *ngIf="touched && errorControl.description.errors?.required">
+              This field cannot be empty
+            </span>
+            <span class="error" *ngIf="errorControl.description.errors?.maxlength">
+              Description should be less than 2000 characters
+            </span>
+            <span class="error" *ngIf="errorControl.description.errors?.serverError">
+              {{serverError.description}}
+          </span>
+
+            <ion-item lines="inset" class="ion-no-padding">
+              <ion-label position="floating">Product Name</ion-label>
+              <ion-input readonly formControlName="productType"></ion-input>
+            </ion-item>
+            <!-- <span class="error" *ngIf="errorControl.description.errors?.required">
+              This field cannot be empty
+            </span> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="pl-10 ion-no-padding" size-xl="4" size-lg="5" size-sm="12" size-md="12" size-xs="12">
+        <ion-card class="ion-no-margin side-card">
+          <ion-card-content>
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-radio-group formControlName="status" (ionChange)="changeStateCallback($event)">
+                <ion-list-header class="ion-no-padding">
+                  <ion-label>visibility</ion-label>
+                </ion-list-header>
+                <ion-row>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Published</ion-label>
+                      <ion-radio color="secondary" slot="start" value="published"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Draft</ion-label>
+                      <ion-radio color="secondary" slot="start" value="draft"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col class="col-12">
+                    <ion-item lines="none">
+                      <ion-label class="ion-padding-end">Locked</ion-label>
+                      <ion-radio color="secondary" slot="start" value="locked"></ion-radio>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-radio-group>
+            </ion-item>
+            <span class="error" *ngIf="errorControl.status.errors?.serverError">
+              {{serverError.status}}
+          </span>
+            <div *ngIf="openEditor">
+
+              <div class="tags-wrapper">
+                <ion-label position="floating">Infusionsoft Tags</ion-label>
+                <ion-searchbar id="search" class="search ion-no-padding" (ionChange)="onSearchTerm($event)"
+                  placeholder="Search Tags"  (ionFocus)="searchBarOnFocus($event)">
+                </ion-searchbar>
+                <div class="taglist-search" *ngIf = "showTagsList" appScrollbar [directInject]="true">
+                  <div style = "height : 25px">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close" (click)="hideTagList()">×</a>
+                  </div>
+                  <p (click)="clickedTag(tag.name)" [class.selected]="tags.indexOf(tag.name) >= 0" *ngFor="let tag of tagsList">{{tag.name}}</p>
+                </div>
+                <div class="editor-tag" (click)="focusTagInput()">
+                  <span class="tag-item" *ngFor="let tag of tags">
+                    {{tag}}
+                    <span class="remove-tag" (click)="removeTag(tag)">×</span>
+                  </span>
+                  <input #tagInput type="text" class="input-tag" (keyup)="onKeyUp($event)" formControlName="tags"
+                    (onChange)="onSearchTerm($event)" appScrollbar [directInject]="true">
+
+                </div>
+                <span class="error" *ngIf="tags.length === 0">
+                  Tags are necessary for locked content
+                </span>
+                <span class="error" *ngIf="errorControl.tags.errors?.serverError">
+                  {{serverError.tags}}
+              </span>
+              </div>
+
+              <ion-item>
+                <app-editor #tinyCategoryAdd
+                  (editorDataToParent)="getEditorValue($event)">
+                </app-editor>
+              </ion-item>
+              <span class="error" *ngIf="errorControl.formModel.errors?.required">
+                This field cannot be empty
+              </span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-button size="default" slot="end" (click)="onClickSubmit()" (keyup.enter)="onClickSubmit()" [disabled]="disabled && !this.productForm.valid">Submit
+    </ion-button>
+  </form>
+</ion-content>
